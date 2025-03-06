@@ -1,3 +1,4 @@
+ 
 name: CI Pipeline
 
 on: [push, pull_request]
@@ -16,10 +17,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest flake8
+          pip install pytest flake8 coverage
 
       - name: Run Flake8 (Code Quality Check)
         run: flake8 .
 
-      - name: Run Pytest (Unit Tests)
-        run: pytest
+      - name: Run Pytest (Unit Tests) with Coverage
+        run: coverage run -m pytest
+
+      - name: Generate Coverage Report
+        run: coverage report -m
